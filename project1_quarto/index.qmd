@@ -4,4 +4,4 @@ title: "Home"
 
 My name is Darren Lin. I'm a first year master's student in the biostatistics department at Johns Hopkins University.
 
-![](images/darren_bike.png)
+![](images/darren_bike.png){fig-align="center" width="465"}

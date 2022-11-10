@@ -4,7 +4,4 @@ title: "About"
 
 My name is Darren Lin. I'm a first year master's student in the biostatistics department at Johns Hopkins University. I was also an undergraduate at Johns Hopkins, where I majored in applied mathematics and public health.
 
-In my free time, I enjoy exploring Baltimore and trying new things. I recently got into bouldering, which is really fun!
-
-
-
+I'm originally from Southern California, but moved to Baltimore for my undergrad. In my free time, I enjoy exploring Baltimore and trying new things. I recently got into bouldering, which is really fun!
