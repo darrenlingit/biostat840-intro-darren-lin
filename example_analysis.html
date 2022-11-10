@@ -83,6 +83,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -152,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./example_analysis.html" aria-current="page">
- <span class="menu-text">Bigfoot</span></a>
+ <span class="menu-text">Example Analysis</span></a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -205,6 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/bigfoot.jpg" class="img-fluid figure-img" width="437"></p>
+<p></p><figcaption class="figure-caption">Image source: <span class="citation" data-cites="mangan_he_2019">(<a href="#ref-mangan_he_2019" role="doc-biblioref">Mangan</a>)</span></figcaption><p></p>
 </figure>
 </div>
 <div class="cell">
@@ -212,26 +232,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearthdata)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"maps"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"maps"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"bigfoot_data.RDS"</span>)) {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  bigfoot_data <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">'2022-09-13'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  bigfoot <span class="ot">&lt;-</span> bigfoot_data<span class="sc">$</span>bigfoot</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"bigfoot_data.RDS"</span>)) {</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  bigfoot_data <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">'2022-09-13'</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  bigfoot <span class="ot">&lt;-</span> bigfoot_data<span class="sc">$</span>bigfoot</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(bigfoot, <span class="at">file =</span> <span class="st">"bigfoot_data.RDS"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>bigfoot <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"bigfoot_data.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(bigfoot, <span class="at">file =</span> <span class="st">"bigfoot_data.RDS"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>bigfoot <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"bigfoot_data.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>Bigfoot</p>
+<p>Here are some of the libraries I used in this analysis.</p>
 </div></div><p>Bigfoot has eluded cryptid hunters for decades now. The goal of this analysis is to help locate Bigfoot, with the intended audience being Bigfoot enthusiasts and other cryptid hunters. The question I’m hoping to answer is: Where is Bigfoot most likely to be spotted?</p>
-<p>This data comes from the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary">Tidy Tuesday</a>. The original data comes from the <a href="https://www.bfro.net/">Bigfoot Field Researchers Organization</a>. The data dictionary is located <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary">here</a>.</p>
+<p>This data comes from the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary">Tidy Tuesday</a> <span class="citation" data-cites="noauthor_tidy_2022">(<a href="#ref-noauthor_tidy_2022" role="doc-biblioref"><em>Tidy <span>Tuesday</span></em></a>)</span>. The original data comes from the <a href="https://www.bfro.net/">Bigfoot Field Researchers Organization</a>. The data dictionary is located <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary">here</a> <span class="citation" data-cites="noauthor_bigfoot_nodate">(<a href="#ref-noauthor_bigfoot_nodate" role="doc-biblioref"><em>Bigfoot <span>Field</span> <span>Researchers</span> <span>Organization</span></em></a>)</span>.</p>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -285,7 +301,7 @@ Warning
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Latitude"</span>,</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Bigfoot Sighting Locations in the Continental United States"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="example_analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="example_analysis_files/figure-html/Location-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Here we see the locations of the various sightings around the United States. Most sightings seem to congregate along the coasts.</p>
@@ -352,10 +368,21 @@ Note
 <p><code>geom_histogram()</code></p>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-noauthor_bigfoot_nodate" class="csl-entry" role="doc-biblioentry">
+<em>Bigfoot <span>Field</span> <span>Researchers</span> <span>Organization</span></em>. <a href="https://www.bfro.net/">https://www.bfro.net/</a>. Accessed 10 Nov. 2022.
+</div>
+<div id="ref-mangan_he_2019" class="csl-entry" role="doc-biblioentry">
+Mangan, Dan. <span>“He Got the <span>FBI</span> to Test ’<span>Bigfoot</span>’ Hair in the 1970s — and This 93-Year-Old Man Is Still Searching for <span>Sasquatch</span>.”</span> <em>CNBC</em>, June 2019, <a href="https://www.cnbc.com/2019/06/05/fbi-tested-bigfoot-hair-in-1970s-government-documents-show.html">https://www.cnbc.com/2019/06/05/fbi-tested-bigfoot-hair-in-1970s-government-documents-show.html</a>.
+</div>
+<div id="ref-noauthor_tidy_2022" class="csl-entry" role="doc-biblioentry">
+<em>Tidy <span>Tuesday</span></em>. R4DS Online Learning Community, Sept. 2022.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

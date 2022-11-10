@@ -11,7 +11,7 @@
     "href": "example_analysis.html",
     "title": "Bigfoot",
     "section": "",
-    "text": "Bigfoot has eluded cryptid hunters for decades now. The goal of this analysis is to help locate Bigfoot, with the intended audience being Bigfoot enthusiasts and other cryptid hunters. The question I’m hoping to answer is: Where is Bigfoot most likely to be spotted?\nThis data comes from the Tidy Tuesday. The original data comes from the Bigfoot Field Researchers Organization. The data dictionary is located here."
+    "text": "Image source: (Mangan)\nBigfoot has eluded cryptid hunters for decades now. The goal of this analysis is to help locate Bigfoot, with the intended audience being Bigfoot enthusiasts and other cryptid hunters. The question I’m hoping to answer is: Where is Bigfoot most likely to be spotted?\nThis data comes from the Tidy Tuesday (Tidy Tuesday). The original data comes from the Bigfoot Field Researchers Organization. The data dictionary is located here (Bigfoot Field Researchers Organization)."
   },
   {
     "objectID": "example_analysis.html#tidyr",
