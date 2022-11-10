@@ -1,0 +1,50 @@
+---
+title: "Example Analysis"
+editor: visual
+---
+
+```{r message = FALSE, warning = FALSE}
+library(tidytuesdayR)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library("maps")
+
+bigfoot_data <- tt_load('2022-09-13')
+bigfoot <- bigfoot_data$bigfoot
+```
+
+```{r}
+weather <- bigfoot %>%
+  select(season, visibility) %>%
+  drop_na()
+
+ggplot(weather, aes(season)) +
+  geom_bar()
+```
+
+```{r}
+
+location <- bigfoot %>%
+  select(latitude, longitude, state) %>%
+  filter(state != "Alaska", state != "Hawaii") %>%
+  distinct() %>%
+  drop_na()
+
+MainStates <- map_data("state")
+ggplot() + 
+  geom_polygon(data=MainStates, aes(x=long, y=lat, group=group),
+                color="black", fill="lightblue" ) +
+  geom_point(data = location, aes(x = longitude, y = latitude), size = 1, 
+        shape = 23, fill = "darkred") +
+  coord_sf(xlim = c(-125, -70), ylim = c(25, 50))
+```
+
+```{r Location by State Counts}
+location <- bigfoot %>%
+  select(state) %>%
+  count(state, sort = TRUE) 
+head(location)
+```

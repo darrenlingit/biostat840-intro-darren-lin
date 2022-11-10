@@ -1,11 +1,7 @@
 ---
-title: "project1_quarto"
+title: "Home"
 ---
 
-This is a Quarto website.
+My name is Darren Lin. I'm a first year master's student in the biostatistics department at Johns Hopkins University.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+![](images/darren_bike.png)
