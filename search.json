@@ -4,13 +4,20 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "My name is Darren Lin. I’m a first year master’s student in the biostatistics department at Johns Hopkins University. I was also an undergraduate at Johns Hopkins, where I majored in applied mathematics and public health.\nIn my free time, I enjoy exploring Baltimore and trying new things. I recently got into bouldering, which is really fun!"
+  },
+  {
+    "objectID": "example_analysis.html",
+    "href": "example_analysis.html",
+    "title": "Example Analysis",
+    "section": "",
+    "text": "library(tidytuesdayR)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\nlibrary(rnaturalearth)\nlibrary(rnaturalearthdata)\nlibrary(\"maps\")\n\nbigfoot_data <- tt_load('2022-09-13')\n\n\n    Downloading file 1 of 1: `bigfoot.csv`\n\nbigfoot <- bigfoot_data$bigfoot\n\n\nweather <- bigfoot %>%\n  select(season, visibility) %>%\n  drop_na()\n\nggplot(weather, aes(season)) +\n  geom_bar()\n\n\n\n\n\nlocation <- bigfoot %>%\n  select(latitude, longitude, state) %>%\n  filter(state != \"Alaska\", state != \"Hawaii\") %>%\n  distinct() %>%\n  drop_na()\n\nMainStates <- map_data(\"state\")\nggplot() + \n  geom_polygon(data=MainStates, aes(x=long, y=lat, group=group),\n                color=\"black\", fill=\"lightblue\" ) +\n  geom_point(data = location, aes(x = longitude, y = latitude), size = 1, \n        shape = 23, fill = \"darkred\") +\n  coord_sf(xlim = c(-125, -70), ylim = c(25, 50))\n\n\n\n\n\nlocation <- bigfoot %>%\n  select(state) %>%\n  count(state, sort = TRUE) \nhead(location)\n\n# A tibble: 6 × 2\n  state          n\n  <chr>      <int>\n1 Washington   601\n2 California   417\n3 Ohio         303\n4 Florida      302\n5 Oregon       249\n6 Illinois     237"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "project1_quarto",
+    "title": "Home",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "My name is Darren Lin. I’m a first year master’s student in the biostatistics department at Johns Hopkins University."
   }
 ]
