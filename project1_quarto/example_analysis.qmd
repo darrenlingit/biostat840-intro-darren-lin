@@ -76,11 +76,11 @@ ggplot() +
        title = "Bigfoot Sighting Locations in the Continental United States")
 ```
 
-::: {.column-margin}
-It's clear that Bigfoot (or the Bigfoot population) can be found all over the country.
-:::
-
 Here we see the locations of the various sightings around the United States. Most sightings seem to congregate along the coasts.
+
+::: {.column-margin}
+It's clear from the map that Bigfoot (or the Bigfoot population) can be found all over the country.
+:::
 
 # Bigfoot Over Time
 
