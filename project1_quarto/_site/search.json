@@ -4,14 +4,35 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "My name is Darren Lin. I’m a first year master’s student in the biostatistics department at Johns Hopkins University. I was also an undergraduate at Johns Hopkins, where I majored in applied mathematics and public health.\nIn my free time, I enjoy exploring Baltimore and trying new things. I recently got into bouldering, which is really fun!"
+    "text": "My name is Darren Lin. I’m a first year master’s student in the biostatistics department at Johns Hopkins University. I was also an undergraduate at Johns Hopkins, where I majored in applied mathematics and public health.\nI’m originally from Southern California, but moved to Baltimore for my undergrad. In my free time, I enjoy exploring Baltimore and trying new things. I recently got into bouldering, which is really fun!"
   },
   {
     "objectID": "example_analysis.html",
     "href": "example_analysis.html",
     "title": "Bigfoot",
     "section": "",
-    "text": "library(tidytuesdayR)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\nlibrary(rnaturalearth)\nlibrary(rnaturalearthdata)\nlibrary(\"maps\")\nlibrary(here)\n\n\nif(!file.exists(\"bigfoot_data.RDS\")) {\n  bigfoot_data <- tt_load('2022-09-13')\n  bigfoot <- bigfoot_data$bigfoot\n\n  saveRDS(bigfoot, file = \"bigfoot_data.RDS\")\n}\n\nbigfoot <- readRDS(\"bigfoot_data.RDS\")\n\n\n\nBigfoot\nBigfoot has eluded cryptid hunters for decades now. The goal of this analysis is to help locate Bigfoot, with the intended audience being Bigfoot enthusiasts and other cryptid hunters. The question I’m hoping to answer is: Where is Bigfoot most likely to be spotted?\nThis data comes from the Tidy Tuesday. The original data comes from the Bigfoot Field Researchers Organization. The data dictionary is located here.\n\nweather <- bigfoot %>%\n  select(season, visibility) %>%\n  replace_na(list(season = \"Unknown\")) %>%\n  drop_na()\n\nggplot(weather, aes(x = factor(season, c(\"Spring\", \"Summer\", \"Fall\", \"Winter\", \"Unknown\")))) +\n  geom_bar() +\n  #facet_wrap(~precip_type) +\n  labs(x = \"Season\",\n       y = \"Number of Sightings\",\n       title = \"Number of Bigfoot Sightings by Season\")\n\n\n\n\nHere we see the seasons where Bigfoot was seen the most. It’s clear that Bigfoot sightings were greatest in the summer and fall seasons, while they were lowest in the winter and spring. This suggests that Bigfoot prefers warmer seasons, or hiberates through the winter.\n\nlocation <- bigfoot %>%\n  distinct() %>%\n  select(latitude, longitude, state) %>%\n  filter(state != \"Alaska\", state != \"Hawaii\") %>%\n  drop_na()\n\nMainStates <- map_data(\"state\")\nggplot() + \n  geom_polygon(data=MainStates, aes(x=long, y=lat, group=group),\n                color=\"black\", fill=\"lightblue\" ) +\n  geom_point(data = location, aes(x = longitude, y = latitude), size = 1, \n        shape = 23, fill = \"darkred\") +\n  coord_sf(xlim = c(-123, -69), ylim = c(25, 50)) +\n  labs(x = \"Longitude\",\n       y = \"Latitude\",\n       title = \"Bigfoot Sighting Locations in the Continental United States\")\n\n\n\n\nHere we see the locations of the various sightings around the United States. Most sightings seem to congregate along the coasts.\n\nsighting_date <- bigfoot %>%\n  select(date, classification) %>%\n  rename(class = classification) %>%\n  drop_na()\n\n\nggplot(sighting_date, aes(x = date)) +\n  geom_histogram() +\n  facet_wrap(~class) +\n  labs(x = \"Date\",\n       y = \"Counts of Bigfoot Sightings\",\n       title = \"Bigfoot Sightings Over Time by Sighting Classification\")\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\nFinally see have Bigfoot sightings over time split up by classification. Class A sightings are where the sightings are clear and where it’s difficult to mistake Bigfoot for another animal. Class B sightings are sightings that occur from a distance and did not offer a clear view, but are still confidently Bigfoot. Class C sightings are second-hand and third-hand reports of Bigfoot and may be inaccurate. We see that Most sightings are Class A and B.\n\n\n\n\n\n\nNote\n\n\n\nMany have claimed that evidence of Bigfoot sightings have gone down, especially with the improvement of cameras and the internet which has made it harder to fake blurry photos. It’s clear from this graph that this is not the case. In fact, Bigfoot sightings have increased over time!"
+    "text": "Image source: (Mangan)\nBigfoot has eluded cryptid hunters for decades now. The goal of this analysis is to help locate Bigfoot, with the intended audience being Bigfoot enthusiasts and other cryptid hunters. The question I’m hoping to answer is: Where is Bigfoot most likely to be spotted?\nThis data comes from the Tidy Tuesday (Tidy Tuesday). The original data comes from the Bigfoot Field Researchers Organization. The data dictionary is located here (Bigfoot Field Researchers Organization)."
+  },
+  {
+    "objectID": "example_analysis.html#tidyr",
+    "href": "example_analysis.html#tidyr",
+    "title": "Bigfoot",
+    "section": "tidyr",
+    "text": "tidyr\nselect()\nreplace_na()\ndrop_na()"
+  },
+  {
+    "objectID": "example_analysis.html#dplyr",
+    "href": "example_analysis.html#dplyr",
+    "title": "Bigfoot",
+    "section": "dplyr",
+    "text": "dplyr\ndistinct()\nrename()"
+  },
+  {
+    "objectID": "example_analysis.html#ggplot2",
+    "href": "example_analysis.html#ggplot2",
+    "title": "Bigfoot",
+    "section": "ggplot2",
+    "text": "ggplot2\ngeom_bar()\ngeom_polygon()\ngeom_point()\ngeom_histogram()"
   },
   {
     "objectID": "index.html",

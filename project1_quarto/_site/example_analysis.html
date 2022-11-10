@@ -83,6 +83,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -152,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./example_analysis.html" aria-current="page">
- <span class="menu-text">Bigfoot</span></a>
+ <span class="menu-text">Example Analysis</span></a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -165,7 +184,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#seasons" id="toc-seasons" class="nav-link active" data-scroll-target="#seasons">Seasons</a></li>
+  <li><a href="#location" id="toc-location" class="nav-link" data-scroll-target="#location">Location</a></li>
+  <li><a href="#bigfoot-over-time" id="toc-bigfoot-over-time" class="nav-link" data-scroll-target="#bigfoot-over-time">Bigfoot Over Time</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#functions-used" id="toc-functions-used" class="nav-link" data-scroll-target="#functions-used">Functions Used</a>
+  <ul class="collapse">
+  <li><a href="#tidyr" id="toc-tidyr" class="nav-link" data-scroll-target="#tidyr">tidyr</a></li>
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr">dplyr</a></li>
+  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2">ggplot2</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -190,6 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/bigfoot.jpg" class="img-fluid figure-img" width="437"></p>
+<p></p><figcaption class="figure-caption">Image source: <span class="citation" data-cites="mangan_he_2019">(<a href="#ref-mangan_he_2019" role="doc-biblioref">Mangan</a>)</span></figcaption><p></p>
 </figure>
 </div>
 <div class="cell">
@@ -197,26 +232,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearthdata)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"maps"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"maps"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"bigfoot_data.RDS"</span>)) {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  bigfoot_data <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">'2022-09-13'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  bigfoot <span class="ot">&lt;-</span> bigfoot_data<span class="sc">$</span>bigfoot</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"bigfoot_data.RDS"</span>)) {</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  bigfoot_data <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">'2022-09-13'</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  bigfoot <span class="ot">&lt;-</span> bigfoot_data<span class="sc">$</span>bigfoot</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(bigfoot, <span class="at">file =</span> <span class="st">"bigfoot_data.RDS"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>bigfoot <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"bigfoot_data.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(bigfoot, <span class="at">file =</span> <span class="st">"bigfoot_data.RDS"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>bigfoot <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"bigfoot_data.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>Bigfoot</p>
+<p>Here are some of the libraries I used in this analysis.</p>
 </div></div><p>Bigfoot has eluded cryptid hunters for decades now. The goal of this analysis is to help locate Bigfoot, with the intended audience being Bigfoot enthusiasts and other cryptid hunters. The question I’m hoping to answer is: Where is Bigfoot most likely to be spotted?</p>
-<p>This data comes from the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary">Tidy Tuesday</a>. The original data comes from the <a href="https://www.bfro.net/">Bigfoot Field Researchers Organization</a>. The data dictionary is located <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary">here</a>.</p>
+<p>This data comes from the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary">Tidy Tuesday</a> <span class="citation" data-cites="noauthor_tidy_2022">(<a href="#ref-noauthor_tidy_2022" role="doc-biblioref"><em>Tidy <span>Tuesday</span></em></a>)</span>. The original data comes from the <a href="https://www.bfro.net/">Bigfoot Field Researchers Organization</a>. The data dictionary is located <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary">here</a> <span class="citation" data-cites="noauthor_bigfoot_nodate">(<a href="#ref-noauthor_bigfoot_nodate" role="doc-biblioref"><em>Bigfoot <span>Field</span> <span>Researchers</span> <span>Organization</span></em></a>)</span>.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bigfoot is not real.</p>
+</div>
+</div>
+<section id="seasons" class="level1">
+<h1>Seasons</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> bigfoot <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(season, visibility) <span class="sc">%&gt;%</span></span>
@@ -234,6 +280,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Here we see the seasons where Bigfoot was seen the most. It’s clear that Bigfoot sightings were greatest in the summer and fall seasons, while they were lowest in the winter and spring. This suggests that Bigfoot prefers warmer seasons, or hiberates through the winter.</p>
+</section>
+<section id="location" class="level1 page-columns page-full">
+<h1>Location</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>location <span class="ot">&lt;-</span> bigfoot <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
@@ -252,10 +301,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Latitude"</span>,</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Bigfoot Sighting Locations in the Continental United States"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="example_analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="example_analysis_files/figure-html/Location-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Here we see the locations of the various sightings around the United States. Most sightings seem to congregate along the coasts.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>It’s clear that Bigfoot (or the Bigfoot population) can be found all over the country.</p>
+</div></div><p>Here we see the locations of the various sightings around the United States. Most sightings seem to congregate along the coasts.</p>
+</section>
+<section id="bigfoot-over-time" class="level1">
+<h1>Bigfoot Over Time</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sighting_date <span class="ot">&lt;-</span> bigfoot <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, classification) <span class="sc">%&gt;%</span></span>
@@ -273,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="example_analysis_files/figure-html/Location by State Counts-1.png" class="img-fluid" width="672"></p>
+<p><img src="example_analysis_files/figure-html/Time-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Finally see have Bigfoot sightings over time split up by classification. Class A sightings are where the sightings are clear and where it’s difficult to mistake Bigfoot for another animal. Class B sightings are sightings that occur from a distance and did not offer a clear view, but are still confidently Bigfoot. Class C sightings are second-hand and third-hand reports of Bigfoot and may be inaccurate. We see that Most sightings are Class A and B.</p>
@@ -290,10 +345,47 @@ Note
 <p>Many have claimed that evidence of Bigfoot sightings have gone down, especially with the improvement of cameras and the internet which has made it harder to fake blurry photos. It’s clear from this graph that this is not the case. In fact, Bigfoot sightings have increased over time!</p>
 </div>
 </div>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>These graphs and charts give better idea of what kind of creature Bigfoot is and when and where to find it. From the first chart, Bigfoot seems to be a creature that enjoys warmer weather. It may even hibernate through the winter. The map plot indicates that Bigfoot is more likely to be found along the coasts, possibly along areas with more trees and forest. Finally, the third graph indicates that Bigfoot was not just a fluke from blurry photographs, but is indeed still present in the current day with many clear sightings.</p>
+</section>
+<section id="functions-used" class="level1">
+<h1>Functions Used</h1>
+<section id="tidyr" class="level2">
+<h2 class="anchored" data-anchor-id="tidyr">tidyr</h2>
+<p><code>select()</code></p>
+<p><code>replace_na()</code></p>
+<p><code>drop_na()</code></p>
+</section>
+<section id="dplyr" class="level2">
+<h2 class="anchored" data-anchor-id="dplyr">dplyr</h2>
+<p><code>distinct()</code></p>
+<p><code>rename()</code></p>
+</section>
+<section id="ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot2">ggplot2</h2>
+<p><code>geom_bar()</code></p>
+<p><code>geom_polygon()</code></p>
+<p><code>geom_point()</code></p>
+<p><code>geom_histogram()</code></p>
 
 
 
-</main> <!-- /main -->
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-noauthor_bigfoot_nodate" class="csl-entry" role="doc-biblioentry">
+<em>Bigfoot <span>Field</span> <span>Researchers</span> <span>Organization</span></em>. <a href="https://www.bfro.net/">https://www.bfro.net/</a>. Accessed 10 Nov. 2022.
+</div>
+<div id="ref-mangan_he_2019" class="csl-entry" role="doc-biblioentry">
+Mangan, Dan. <span>“He Got the <span>FBI</span> to Test ’<span>Bigfoot</span>’ Hair in the 1970s — and This 93-Year-Old Man Is Still Searching for <span>Sasquatch</span>.”</span> <em>CNBC</em>, June 2019, <a href="https://www.cnbc.com/2019/06/05/fbi-tested-bigfoot-hair-in-1970s-government-documents-show.html">https://www.cnbc.com/2019/06/05/fbi-tested-bigfoot-hair-in-1970s-government-documents-show.html</a>.
+</div>
+<div id="ref-noauthor_tidy_2022" class="csl-entry" role="doc-biblioentry">
+<em>Tidy <span>Tuesday</span></em>. R4DS Online Learning Community, Sept. 2022.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

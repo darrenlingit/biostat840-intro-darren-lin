@@ -8,7 +8,8 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - example_analysis.qmd
+      - href: example_analysis.qmd
+        text: Example Analysis
 
 format:
   html:

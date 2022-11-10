@@ -1,20 +1,18 @@
 ---
 title: "Bigfoot"
 editor: visual
+bibliography: citations.bib
+csl: modern-language-association.csl
 ---
 
-![](images/bigfoot.jpg){fig-align="center" width="437"}
+![Image source: [@mangan_he_2019]](images/bigfoot.jpg){fig-align="center" width="437"}
 
 ```{r message = FALSE, warning = FALSE}
 library(tidytuesdayR)
 library(ggplot2)
 library(tidyr)
 library(dplyr)
-library(rnaturalearth)
-library(rnaturalearthdata)
 library("maps")
-library(here)
-
 
 if(!file.exists("bigfoot_data.RDS")) {
   bigfoot_data <- tt_load('2022-09-13')
@@ -26,13 +24,13 @@ if(!file.exists("bigfoot_data.RDS")) {
 bigfoot <- readRDS("bigfoot_data.RDS")
 ```
 
-::: column-margin
-Bigfoot
+::: {.column-margin}
+Here are some of the libraries I used in this analysis.
 :::
 
 Bigfoot has eluded cryptid hunters for decades now. The goal of this analysis is to help locate Bigfoot, with the intended audience being Bigfoot enthusiasts and other cryptid hunters. The question I'm hoping to answer is: Where is Bigfoot most likely to be spotted?
 
-This data comes from the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary). The original data comes from the [Bigfoot Field Researchers Organization](https://www.bfro.net/). The data dictionary is located [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary).
+This data comes from the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary) [@noauthor_tidy_2022]. The original data comes from the [Bigfoot Field Researchers Organization](https://www.bfro.net/). The data dictionary is located [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-09-13#data-dictionary) [@noauthor_bigfoot_nodate].
 
 ::: callout-warning
 Bigfoot is not real.
@@ -59,7 +57,7 @@ Here we see the seasons where Bigfoot was seen the most. It's clear that Bigfoot
 
 # Location
 
-```{r}
+```{r Location}
 location <- bigfoot %>%
   distinct() %>%
   select(latitude, longitude, state) %>%
@@ -77,6 +75,10 @@ ggplot() +
        y = "Latitude",
        title = "Bigfoot Sighting Locations in the Continental United States")
 ```
+
+::: {.column-margin}
+It's clear that Bigfoot (or the Bigfoot population) can be found all over the country.
+:::
 
 Here we see the locations of the various sightings around the United States. Most sightings seem to congregate along the coasts.
 
