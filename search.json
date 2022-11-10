@@ -4,14 +4,35 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "My name is Darren Lin. I’m a first year master’s student in the biostatistics department at Johns Hopkins University. I was also an undergraduate at Johns Hopkins, where I majored in applied mathematics and public health.\nIn my free time, I enjoy exploring Baltimore and trying new things. I recently got into bouldering, which is really fun!"
+    "text": "My name is Darren Lin. I’m a first year master’s student in the biostatistics department at Johns Hopkins University. I was also an undergraduate at Johns Hopkins, where I majored in applied mathematics and public health.\nI’m originally from Southern California, but moved to Baltimore for my undergrad. In my free time, I enjoy exploring Baltimore and trying new things. I recently got into bouldering, which is really fun!"
   },
   {
     "objectID": "example_analysis.html",
     "href": "example_analysis.html",
-    "title": "Example Analysis",
+    "title": "Bigfoot",
     "section": "",
-    "text": "library(tidytuesdayR)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\nlibrary(rnaturalearth)\nlibrary(rnaturalearthdata)\nlibrary(\"maps\")\n\nbigfoot_data <- tt_load('2022-09-13')\n\n\n    Downloading file 1 of 1: `bigfoot.csv`\n\nbigfoot <- bigfoot_data$bigfoot\n\n\nweather <- bigfoot %>%\n  select(season, visibility) %>%\n  drop_na()\n\nggplot(weather, aes(season)) +\n  geom_bar()\n\n\n\n\n\nlocation <- bigfoot %>%\n  select(latitude, longitude, state) %>%\n  filter(state != \"Alaska\", state != \"Hawaii\") %>%\n  distinct() %>%\n  drop_na()\n\nMainStates <- map_data(\"state\")\nggplot() + \n  geom_polygon(data=MainStates, aes(x=long, y=lat, group=group),\n                color=\"black\", fill=\"lightblue\" ) +\n  geom_point(data = location, aes(x = longitude, y = latitude), size = 1, \n        shape = 23, fill = \"darkred\") +\n  coord_sf(xlim = c(-125, -70), ylim = c(25, 50))\n\n\n\n\n\nlocation <- bigfoot %>%\n  select(state) %>%\n  count(state, sort = TRUE) \nhead(location)\n\n# A tibble: 6 × 2\n  state          n\n  <chr>      <int>\n1 Washington   601\n2 California   417\n3 Ohio         303\n4 Florida      302\n5 Oregon       249\n6 Illinois     237"
+    "text": "Bigfoot has eluded cryptid hunters for decades now. The goal of this analysis is to help locate Bigfoot, with the intended audience being Bigfoot enthusiasts and other cryptid hunters. The question I’m hoping to answer is: Where is Bigfoot most likely to be spotted?\nThis data comes from the Tidy Tuesday. The original data comes from the Bigfoot Field Researchers Organization. The data dictionary is located here."
+  },
+  {
+    "objectID": "example_analysis.html#tidyr",
+    "href": "example_analysis.html#tidyr",
+    "title": "Bigfoot",
+    "section": "tidyr",
+    "text": "tidyr\nselect()\nreplace_na()\ndrop_na()"
+  },
+  {
+    "objectID": "example_analysis.html#dplyr",
+    "href": "example_analysis.html#dplyr",
+    "title": "Bigfoot",
+    "section": "dplyr",
+    "text": "dplyr\ndistinct()\nrename()"
+  },
+  {
+    "objectID": "example_analysis.html#ggplot2",
+    "href": "example_analysis.html#ggplot2",
+    "title": "Bigfoot",
+    "section": "ggplot2",
+    "text": "ggplot2\ngeom_bar()\ngeom_polygon()\ngeom_point()\ngeom_histogram()"
   },
   {
     "objectID": "index.html",
